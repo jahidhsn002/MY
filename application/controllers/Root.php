@@ -10,7 +10,30 @@ class Root extends CI_Controller {
 
 		$this->load->library('grocery_CRUD');
 	}
+	
+	public function index(){
+		
+		$this->config->load('grocery_crud');
+		$this->config->set_item('grocery_crud_dialog_forms',true);
+		$this->config->set_item('grocery_crud_default_per_page',25);
+		
+		$output1 = $this->patient();
 
+		$output2 = $this->medicine();
+
+		$output3 = $this->diagnosis();
+
+		$js_files = $output1->js_files + $output2->js_files + $output3->js_files;
+		$css_files = $output1->css_files + $output2->css_files + $output3->css_files;
+		$output = "<h1>List 1</h1>".$output1->output."<h1>List 2</h1>".$output2->output."<h1>List 3</h1>".$output3->output;
+
+		$this->_example_output((object)array(
+				'js_files' => $js_files,
+				'css_files' => $css_files,
+				'output'	=> $output
+		));
+	}
+	
 	public function _example_output($output = null){
 		$this->load->view('example.php',$output);
 	}
@@ -40,7 +63,11 @@ class Root extends CI_Controller {
 		
 		//Executing
 		$output = $crud->render();
-		$this->_example_output($output);
+		if($crud->getState() != 'list') {
+			$this->_example_output($output);
+		} else {
+			return $output;
+		}
 
 		
 	}
@@ -74,7 +101,12 @@ class Root extends CI_Controller {
 		
 		//Executing
 		$output = $crud->render();
-		$this->_example_output($output);
+		echo $crud->getState();
+		if($crud->getState() != 'list') {
+			$this->_example_output($output);
+		} else {
+			return $output;
+		}
 
 		
 	}
@@ -102,7 +134,11 @@ class Root extends CI_Controller {
 		
 		//Executing
 		$output = $crud->render();
-		$this->_example_output($output);
+		if($crud->getState() != 'list') {
+			$this->_example_output($output);
+		} else {
+			return $output;
+		}
 
 		
 	}
@@ -122,10 +158,13 @@ class Root extends CI_Controller {
 		//Field setup
 		$crud->set_rules('Medicine_Name','Name','required');
 		
-		
 		//Executing
 		$output = $crud->render();
-		$this->_example_output($output);
+		if($crud->getState() != 'list') {
+			$this->_example_output($output);
+		} else {
+			return $output;
+		}
 
 		
 	}
