@@ -2,8 +2,7 @@
 
 class Root extends CI_Controller {
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 
 		$this->load->database();
@@ -108,6 +107,27 @@ class Root extends CI_Controller {
 		
 	}
 	
-	
+	public function medicine(){
+		
+		//Config
+		$crud = new grocery_CRUD();
+		$this->config->load('grocery_crud');
+		$this->config->set_item('grocery_crud_dialog_forms',true);
+		
+		//Setting Database
+		$crud->set_theme('datatables');
+		$crud->set_table('pms_medicine');
+		$crud->set_subject('Medicine');
+		
+		//Field setup
+		$crud->set_rules('Medicine_Name','Name','required');
+		
+		
+		//Executing
+		$output = $crud->render();
+		$this->_example_output($output);
+
+		
+	}
 	
 }

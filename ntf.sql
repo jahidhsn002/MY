@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2016 at 10:49 AM
+-- Generation Time: Mar 09, 2016 at 11:54 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -30,6 +30,19 @@ CREATE TABLE `pms_diagnosis` (
   `Diagnosis_Id` int(10) UNSIGNED NOT NULL,
   `Diagnosis_Name` varchar(100) NOT NULL,
   `Diagnosis_Description` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pms_medicine`
+--
+
+CREATE TABLE `pms_medicine` (
+  `Medicine_Id` int(10) UNSIGNED NOT NULL,
+  `Medicine_Name` varchar(100) NOT NULL,
+  `Scientific_Name` varchar(100) NOT NULL,
+  `Manufacturer` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -83,6 +96,12 @@ ALTER TABLE `pms_diagnosis`
   ADD PRIMARY KEY (`Diagnosis_Id`);
 
 --
+-- Indexes for table `pms_medicine`
+--
+ALTER TABLE `pms_medicine`
+  ADD PRIMARY KEY (`Medicine_Id`);
+
+--
 -- Indexes for table `pms_patient`
 --
 ALTER TABLE `pms_patient`
@@ -103,6 +122,11 @@ ALTER TABLE `pms_setting`
 --
 ALTER TABLE `pms_diagnosis`
   MODIFY `Diagnosis_Id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `pms_medicine`
+--
+ALTER TABLE `pms_medicine`
+  MODIFY `Medicine_Id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `pms_patient`
 --
