@@ -64,11 +64,9 @@ class Root extends CI_Controller {
 		$crud->set_rules('Doctor_Qualification','Qualification','required');
 		$crud->set_rules('Doctor_Phone','Phone number','required|numeric');
 		$crud->set_rules('Doctor_Email','Email','valid_email');
-		//$crud->set_rules('Chamber_Name','Chamber','');
-		//$crud->set_rules('Chamber_Address','Phone number','email');
+		
 		
 		//Set Field Type
-		//$crud->field_type('Patient_Sex','dropdown', array('male' => 'Male', 'female' => 'Female','other' => 'Other'));
 		$crud->field_type('Doctor_Speciality','text');
 		$crud->field_type('Doctor_Qualification','text');
 		$crud->field_type('Chamber_Address','text');
@@ -81,4 +79,35 @@ class Root extends CI_Controller {
 
 		
 	}
+	
+	public function diagnosis(){
+		
+		//Config
+		$crud = new grocery_CRUD();
+		$this->config->load('grocery_crud');
+		$this->config->set_item('grocery_crud_dialog_forms',true);
+		
+		//Setting Database
+		$crud->set_theme('datatables');
+		$crud->set_table('pms_diagnosis');
+		$crud->set_subject('Diagnosis');
+		
+		//Field setup
+		$crud->set_rules('Diagnosis_Name','Name','required|alpha_numeric_spaces');
+		
+	
+		
+		//Set Field Type
+		$crud->field_type('Diagnosis_Description','text');
+		
+		
+		//Executing
+		$output = $crud->render();
+		$this->_example_output($output);
+
+		
+	}
+	
+	
+	
 }
